@@ -10,6 +10,12 @@ app.MapPost("/", (Product product) =>
 app.MapPut("/", () => "Requisição feita com o verbo PUT");
 app.MapDelete("/", () => "Requisição feita com o verbo DELETE");
 app.MapMethods("/", new[] { "PATCH", "OPTIONS" }, () => "Requisição feita com o verbo PATCH ou OPTIONS");
+app.MapGet("/products/{id}", (int id, string? search) =>
+{
+    Console.WriteLine(id);
+    Console.WriteLine(search);
+    return "Recebendo route values e query strings";
+});
 
 app.Run();
 
