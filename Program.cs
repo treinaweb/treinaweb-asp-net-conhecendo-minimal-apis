@@ -19,5 +19,16 @@ app.MapGet("/api/todos/{id}", (int id, TWTodoContext context) =>
     var todo = context.Todos.Find(id);
     return todo is null ? Results.NotFound() : Results.Ok(todo);
 });
+app.MapDelete("/api/todos/{id}", (int id, TWTodoContext context) =>
+{
+    var todo = context.Todos.Find(id);
+    if (todo is null)
+    {
+        return Results.NotFound();
+    }
+    context.Remove(todo);
+    context.SaveChanges();
+    return Results.NoContent();
+});
 
 app.Run();
