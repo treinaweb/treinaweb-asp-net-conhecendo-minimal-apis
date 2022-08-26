@@ -1,9 +1,13 @@
+using TWTodos;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddScoped<DbService>();
 var app = builder.Build();
 
 app.MapGet("/", () => "Requisição feita com o verbo GET");
-app.MapPost("/", (Product product) =>
+app.MapPost("/", (Product product, DbService service) =>
 {
+    Console.WriteLine(service.Teste());
     Console.WriteLine(product);
     return Results.Ok(product);
 });
