@@ -30,5 +30,16 @@ app.MapDelete("/api/todos/{id}", (int id, TWTodoContext context) =>
     context.SaveChanges();
     return Results.NoContent();
 });
+app.MapPut("/api/todos/{id}", (int id, Todo todo, TWTodoContext context) =>
+{
+    if (!context.Todos.Any(t => t.Id == id))
+    {
+        return Results.NotFound();
+    }
+    todo.Id = id;
+    context.Todos.Update(todo);
+    context.SaveChanges();
+    return Results.Ok(todo);
+});
 
 app.Run();
