@@ -14,5 +14,10 @@ app.MapPost("/api/todos", (Todo todo, TWTodoContext context) =>
     return Results.Created($"/api/todos/{todo.Id}", todo);
 });
 app.MapGet("/api/todos", (TWTodoContext context) => Results.Ok(context.Todos));
+app.MapGet("/api/todos/{id}", (int id, TWTodoContext context) =>
+{
+    var todo = context.Todos.Find(id);
+    return todo is null ? Results.NotFound() : Results.Ok(todo);
+});
 
 app.Run();
