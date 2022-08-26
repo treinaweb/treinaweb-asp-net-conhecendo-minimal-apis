@@ -5,7 +5,7 @@ app.MapGet("/", () => "Requisição feita com o verbo GET");
 app.MapPost("/", (Product product) =>
 {
     Console.WriteLine(product);
-    return "Requisição feita com o verbo POST";
+    return Results.Ok(product);
 });
 app.MapPut("/", () => "Requisição feita com o verbo PUT");
 app.MapDelete("/", () => "Requisição feita com o verbo DELETE");
