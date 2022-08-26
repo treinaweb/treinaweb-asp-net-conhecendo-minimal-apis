@@ -13,5 +13,6 @@ app.MapPost("/api/todos", (Todo todo, TWTodoContext context) =>
     context.SaveChanges();
     return Results.Created($"/api/todos/{todo.Id}", todo);
 });
+app.MapGet("/api/todos", (TWTodoContext context) => Results.Ok(context.Todos));
 
 app.Run();
